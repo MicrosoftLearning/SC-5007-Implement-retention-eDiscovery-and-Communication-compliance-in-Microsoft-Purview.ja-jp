@@ -106,7 +106,7 @@ lab:
 
 このタスクでは、PowerShell を使用して保持ポリシーを作成および管理します。
 
-1. 管理者特権での PowerShell ウィンドウを開きます。
+1. 管理者特権の PowerShell ウィンドウを開きます。
 1. 次のコマンドレットを入力して、Exchange Online PowerShell モジュールの最新版をインストールします。
 
     ```powershell
@@ -145,64 +145,68 @@ lab:
 
 PowerShell を使って保持期間を 3 年に設定した保持ポリシーを正常に作成しました。
 
-## タスク 4 - アダプティブ スコープを使用して保持ポリシーを作成する
+<!--- Commenting out until adaptive scope issue is resolved
 
-ここでは、法務や小売などの特定の部門を対象とするアダプティブ スコープを持つ保持ポリシーを作成します。
+## Task 4 – Create retention policy with adaptive scope
 
-1. Microsoft Edge で、Microsoft Purview ポータル `https://purview.microsoft.com` にアクセスして、ログインします。
-1. 左側のナビゲーション バーから **[設定]** を選択します。
-1. **[ロールとスコープ]** を展開してから、**[アダプティブ スコープ]** を選択します。
-1. **[アダプティブ スコープ]** ページで、 **[+ スコープを作成]** を選択します。
-1. **[アダプティブ ポリシー スコープに名前を付ける]** ページで、次を入力します。
+Here, you will create a retention policy with adaptive scope targeting specific departments like Legal and Retail.
 
-   - **名前**: `Legal Documents Retention`
-   - **説明**: `Retention for legal related documents`
+1. In Microsoft Edge, navigate to the Microsoft Purview portal, `https://purview.microsoft.com`, and log in.
+1. Select **Settings** from the left navigation bar.
+1. Expand **Roles and scopes** then select **Adaptive scopes**.
+1. On the **Adaptive scopes** page select **+ Create scope**.
+1. On the **Name your adaptive policy scope page**, enter:
 
-1. [**次へ**] を選択します。
-1. **[管理単位の割り当て]** ページで、**[次へ]** を選択します。
-1. **[作成するスコープの種類]** ページで、**[ユーザー]** を選択してから、**[次へ]** を選択します。
-1. **[ユーザーを定義するクエリを作成する]** ページの **[ユーザー属性]** で、次を選択します。
+   - **Name**: `Legal Documents Retention`
+   - **Description**: `Retention for legal related documents`
 
-   - **属性**:部署
-   - **演算子**: が次の値に等しい
-   - **値**: `Legal`
+1. Select **Next**.
+1. On the **Assign admin unit page**, select **Next**.
+1. On the **What type of scope do you want to create?** page, select **Users** and then **Next**.
+1. On the **Create the query to define users** page, under **User attributes**, select:
 
-1. 2 つ目の属性を追加する場合は、**[+ 属性を追加]** ボタンを選択し、次の値を指定します。
+   - **Attribute**: Department
+   - **Operator**: is equal to
+   - **Value**: `Legal`
 
-   - **クエリ演算子**:もしくは
-   - **属性**:部署
-   - **演算子**: が次の値に等しい
-   - **値**: `Retail`
+1. Add a second attribute by selecting the **+ Add attribute** button with values:
 
-    >![ユーザー値を定義するクエリを示すスクリーンショット。](./Media/query-to-define-users.png)
+   - **Query operator**: Or
+   - **Attribute**: Department
+   - **Operator**: is equal to
+   - **Value**: `Retail`
 
-1. **[確認と完了]** ページで、**[次へ]** を選択してから、**[送信]** を選択します。
-1. スコープが作成されたら、**[完了]** を選択して、**[アダプティブ スコープ]** ページに戻ります。
-1. **[ソリューション]** > **[データ ライフサイクル管理]** を選択します。
-1. **[ポリシー]** を展開してから、**[保持ポリシー]** を選択します。
-1. **[保持ポリシー]** ページで、**[+ 新しい保持ポリシー]** を選択します。
-1. **[アイテム保持ポリシーの名前を設定]** ページで以下を入力します。
+    >![Screenshot showing the query to define users values.](./Media/query-to-define-users.png)
 
-   - **名前**: `Legal Data Retention`
-   - **説明**: `Retention of all documents within the legal and retail departments.`
+1. Select **Next** and then **Submit** on the **Review and finish** page.
+1. Once your scope has been created select **Done** to get back to the **Adaptive scopes** page.
+1. Select **Solutions** > **Data Lifecycle Management**.
+1. Expand **Policies** then select **Retention policies**.
+1. On the **Retention policies** page select **+ New retention policy**.
+1. On the **Name your retention policy page**, enter:
 
-1. [**次へ**] を選択します。
-1. **[ポリシー スコープ]** ページで、**[次へ]** を選びます。
-1. **[作成する保持ポリシーの種類を選択する]** ページで、**[アダプティブ]** を選択してから、**[次へ]** を選択します。
-1. **[アダプティブ ポリシーのスコープと場所を選択する]** ページで、**[+ スコープの追加]** を選択し、**[法的文書の保持]** スコープを選択します。
-1. **[ポリシーを適用する場所の選択]** ページで、次を有効にします。
+   - **Name**: `Legal Data Retention`
+   - **Description**: `Retention of all documents within the legal and retail departments.`
 
-   - Exchange メールボックス
-   - OneDrive アカウント
+1. Select **Next**.
+1. On the **Policy Scope** page, select **Next**.
+1. On the **Choose the type of retention policy to create** page, select **Adaptive** and then **Next**.
+1. On the **Choose adaptive policy scopes and locations** page, select **+ Add scopes** and choose the **Legal Documents Retention** scope.
+1. Under **Choose locations to apply the policy** enable:
 
-1. [**次へ**] を選択します。
-1. **[コンテンツを保持するか、削除するか、または両方を行うかを決定する]** ページで、次を入力します。
+   - Exchange mailboxes
+   - OneDrive accounts
 
-   - **アイテムを特定の期間保持する**:5 年
-   - **保持期間開始の条件**:アイテムが作成されたとき
-   - **[保持期間の終了時]** :何もしない
+1. Select **Next**.
+1. On the **Decide if you want to retain content, delete it, or both** page, enter:
 
-1. **[確認と完了]** で、**[次へ]** を選択してから、**[送信]** を選択します。
-1. ポリシーを作成したら、**[完了]** を選択します。
+   - **Retain items for a specific period**: 5 years
+   - **Start the retention period based on**: When items were created
+   - **At the end of the retention period**: Do nothing
 
-アダプティブ スコープがアイテム保持ポリシーに正常に適用されました。
+1. Select **Next** and then **Submit** on the **Review and finish**.
+1. Once your policy is created, select **Done**.
+
+You have successfully applied an adaptive scope to a retention policy.
+
+--->
